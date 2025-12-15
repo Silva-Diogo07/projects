@@ -1,15 +1,13 @@
-#include <cs50.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdbool.h>
 
-// Gera um número secreto aleatório entre 1 e um máximo definido pelo utilizador
 void numero_secreto(int *secret)
 {
     int max;
 
-    // Pergunta ao utilizador qual será o valor máximo possível
     printf("Qual será o número máximo? ");
     scanf("%d", &max);
 
@@ -61,18 +59,12 @@ bool verificar_palpite(int *palpite, int *secret, int *tentativas)
     }
 }
 
-int main(void)
+void play(int tentativas)
 {
-    int tentativas; // Número de tentativas disponíveis
-    int palpite;    // Palpite do jogador
-    int secret;     // Número secreto
+    int palpite;
+    int secret;
 
-    // Gera o número secreto
     numero_secreto(&secret);
-
-    // Pergunta quantas tentativas o jogador terá
-    pedir_tentativas(&tentativas);
-
     // Loop principal do jogo:
     // Continua enquanto o jogador não acertar
     // e ainda houver tentativas disponíveis
@@ -81,14 +73,35 @@ int main(void)
         pedir_palpite(&palpite);
     }
     while (!verificar_palpite(&palpite, &secret, &tentativas) && tentativas > 0);
+    if (tentativas == 0)
+    {
+        printf("Acabou o jogo!\n");
+    }
 
-    // Se sair do loop sem acertar, o jogador perdeu
-    printf("Perdeste\n");
-
-    // Informação de debug (mostra o número secreto)
-    printf("\n");
-    printf("Debug\n");
-    printf("Número Secreto : %d\n", secret);
 }
 
-// TODO : playAgain
+void playAgain()
+{
+    int tentativas;
+
+    pedir_tentativas(&tentativas);
+    play(tentativas);
+}
+
+int main(void)
+{
+    int tentativas;
+    char ask_play[10];
+
+    // Pergunta quantas tentativas o jogador terá
+    pedir_tentativas(&tentativas);
+    play(tentativas);
+
+    printf("Queres jogar outra vez? ");
+    scanf("%9s" , ask_play);
+
+    if (strcmp(ask_play , "sim") == 0)
+    {
+        playAgain();
+    }
+}
