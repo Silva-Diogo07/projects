@@ -1,3 +1,5 @@
+// README - Exercise made to practise and how to understand loops
+
 #include <stdio.h>
 
 void forLoop(int x)
@@ -40,21 +42,21 @@ int main(void)
     int z;
 
     printf("Digita x: ");
-    scanf("%d" , &x );
+    scanf("%d", &x );
 
     printf("\n");
     forLoop(x);
     printf("\n");
 
     printf("Digita y: ");
-    scanf("%d" , &y);
+    scanf("%d", &y);
 
     printf("\n");
     whileLoop(y);
     printf("\n");
 
     printf("Digita z: ");
-    scanf("%d" , &z);
+    scanf("%d", &z);
 
     printf("\n");
     do_whileLoop(z);
