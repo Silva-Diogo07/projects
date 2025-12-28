@@ -1,13 +1,28 @@
 #include <stdio.h>
 #include <string.h>
 
-int binarySearch(int array[], int size, int target)
+int binarySearch(int arr[], int size, int target)
 {
-    // definir low e high
-    // enquanto low <= high
-    // calcular mid
-    // comparar array[mid] com target
+    int low = 0;
+    int high = size - 1;
+    
+    while (low <= high)
+    {
+        int mid = low + (high - low) / 2;
 
+        if (arr[mid] == target)
+            return mid;
+        
+        else if (arr[mid] < target)
+        {
+            low = mid + 1;
+        }
+        else
+        {
+            high = mid - 1;
+        }        
+    }
+    return -1;
 }
 
 // int n --> How many numbers will be read
@@ -25,7 +40,7 @@ void organizeNumbers(int n, int arr[])
 {
     for (int i = 0; i < n - 1; i++)
     {
-        for (int j = 0; j < n - 1 - i; j++) // n - 1 - i --> Avoids comparing numbers already ordened
+        for (int j = 0; j < n - 1 - i; j++) // n - 1 - i --> Avoids comparing numbers already sorted
         {
             if (arr[j] > arr[j + 1]) // if current is greater then next one
             {
@@ -60,5 +75,20 @@ int main(void)
     printf("\nMenor: %d\n", arr[0]);
     printf("Maior: %d\n", arr[n - 1]);
 
+    int size = n;
+
+    int target;
+    printf("Number to be found: ");
+    scanf("%d", &target);
+
+    int result = binarySearch(arr, size, target);
+
+    if (result != -1)
+    {
+        printf("Element found at index [%d]\n", result);
+        return 0;
+    }
+    printf("Not found\n");
+    
     return 0;
 }
