@@ -50,6 +50,7 @@ void printArr(int n, int arr[])
     printf("\n");
 }
 
+
 int main(void)
 {
     int n;
@@ -58,21 +59,25 @@ int main(void)
     printf("Number of elements: ");
     scanf("%d", &n);
 
+    saveNumber(n, arr);
+
     char option[100];
     printf("Enter how to order numbers ( l-h | h-l ) ");
     scanf("%99s", option);
 
     if (strcmp(option, "h-l") == 0)
     {
-        printf("Banana\n");
+        high_to_low(n, arr);
+        printArr(n, arr);
         return 0;
     }
-    printf("Kiwi\n");
+    low_to_high(n, arr);
+    printArr(n, arr);
+    
+
 
     return 0;
 
-    // saveNumber(n, arr);
-    // high_to_low(n, arr);
-    // printArr(n, arr);
+
     
 }
