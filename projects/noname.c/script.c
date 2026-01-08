@@ -4,38 +4,37 @@
 
 typedef enum
 {
-    Converters,
+    Converters = 1,
     Games,
     Calculators
-} Choice;
+} programType;
 
-int switch_func(int program_type)
+void subMenu(programType program_type)
 {
     switch (program_type)
     {
-        case 1:
+        case Converters:
             printf("Converters:\n");
             printf("1. Temperature Converter\n");
             printf("2. Weight Converter\n");
             break;
 
-        case 2:
+        case Games:
             printf("Games:\n");
             printf("1. Guess the Number\n");
             printf("2. Rock Paper Scissors\n");
             break;
     
-        case 3:
+        case Calculators:
             printf("Calculators:\n");
             printf("1. Circle Calculator\n");
             printf("2. Compound Interest Calculator\n");
             break;
 
         default:
-            printf("Please choose a valid type of program (1-3):\n ");
+            printf("Invalid option. Try again:\n ");
             break;
     }
-    return program_type;
 }
 
 int main()
@@ -48,7 +47,7 @@ int main()
     printf("2. Games\n");
     printf("3. Calculators\n\n");
     scanf("%d", &program_type);
-
+    
     switch_func(program_type);
 
     return 0;
