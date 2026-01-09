@@ -4,6 +4,8 @@
 #include <time.h>
 #include <stdlib.h>
 
+/* ===================== ENUMS ===================== */
+
 typedef enum
 {
     Converters = 1,
@@ -28,6 +30,8 @@ typedef enum
     circleCalculator = 1,
     compundCalculator
 } calculatorPrograms;
+
+/* ===================== MENUS ===================== */
 
 void subMenu(programType program_type)
 {
@@ -57,63 +61,31 @@ void subMenu(programType program_type)
     }
 }
 
+/* ===================== CONVERTERS ===================== */
+
 void convertersProgram(convertersPrograms program)
 {
     switch (program)
     {
         case tempConverter:
-            printf("Hot Food\n");
+            printf("Temperature Converter (not implemented yet)\n");
             break;
 
         case weightConverter:
-            printf("Heavy Food\n");
+            printf("Weight Converter (not implemented yet)\n");
             break;
 
         default:
-            printf("Invalid option. Try again.\n");
+            printf("Invalid option.\n");
             break;
     }
 }
 
-void gamesProgram(gamesPrograms program, int *tries, int *secret)
-{
-    switch (program)
-    {
-        case GN:
-            play(tries, secret);
-            break;
-
-        case RPS:
-            printf("Rock Paper Scissors\n");
-            break;
-
-        default:
-            printf("Invalid option. Try again.\n");
-            break;
-    }
-}
-
-void calculatorProgram(calculatorPrograms program)
-{
-    switch (program)
-    {
-        case circleCalculator:
-            printf("Circle Calculator Program\n");
-            break;
-
-        case compundCalculator:
-            printf("Compound Interest Calculator Program\n");
-            break;
-
-        default:
-            printf("Invalid option. Try again.\n");
-            break;
-    }
-}
+/* ===================== GUESS THE NUMBER ===================== */
 
 void secret_number(int *secret)
 {
-    int max = 0;
+    int max;
 
     printf("Enter the max number: ");
     if (scanf("%d", &max) != 1 || max <= 0)
@@ -127,7 +99,7 @@ void secret_number(int *secret)
 
 void ask_for_trys(int *tries)
 {
-    printf("Enter how many trys you want: ");
+    printf("Enter how many tries you want: ");
     scanf("%d", tries);
 }
 
@@ -151,12 +123,21 @@ bool check_guess(int *guess, int *secret, int *tries)
         (*tries)--;
         return false;
     }
-    else
-    {
-        printf("You guessed right!\n");
-        return true;
-    }
+
+    printf("You guessed right!\n");
+    return true;
 }
+
+bool askPlayAgain(void)
+{
+    char choice;
+
+    printf("Play again? (y/n): ");
+    scanf(" %c", &choice);  // espaço antes do %c é IMPORTANTE
+
+    return (choice == 'y' || choice == 'Y');
+}
+
 
 void play(int *tries, int *secret)
 {
@@ -177,16 +158,74 @@ void play(int *tries, int *secret)
     }
 }
 
+/* ===================== RUNNERS ===================== */
+
+void runGuessTheNumber(void)
+{
+    int tries = 0;
+    int secret = 0;
+
+    do
+    {
+        play(&tries, &secret);
+    }
+    while (askPlayAgain());
+}
+
+void runRockPaperScissors(void)
+{
+    printf("Rock Paper Scissors (not implemented yet)\n");
+}
+
+/* ===================== GAMES MENU ===================== */
+
+void gamesProgram(gamesPrograms program)
+{
+    switch (program)
+    {
+        case GN:
+            runGuessTheNumber();
+            break;
+
+        case RPS:
+            runRockPaperScissors();
+            break;
+
+        default:
+            printf("Invalid option.\n");
+            break;
+    }
+}
+
+/* ===================== CALCULATORS ===================== */
+
+void calculatorProgram(calculatorPrograms program)
+{
+    switch (program)
+    {
+        case circleCalculator:
+            printf("Circle Calculator (not implemented yet)\n");
+            break;
+
+        case compundCalculator:
+            printf("Compound Interest Calculator (not implemented yet)\n");
+            break;
+
+        default:
+            printf("Invalid option.\n");
+            break;
+    }
+}
+
+/* ===================== MAIN ===================== */
+
 int main()
 {
     srand(time(NULL));
 
-    programType program_type = 0;
-    int program = 0;
-    int input = 0;
-
-    int tries = 0;
-    int secret = 0;
+    programType program_type;
+    int program;
+    int input;
 
     printf("Choose a type of program (1-3):\n");
     printf("1. Converters\n");
@@ -196,7 +235,6 @@ int main()
     if (scanf("%d", &input) != 1)
     {
         printf("Invalid input.\n");
-        while (getchar() != '\n');
         return 1;
     }
 
@@ -204,7 +242,7 @@ int main()
 
     if (program_type < Converters || program_type > Calculators)
     {
-        printf("Invalid option. Try again.\n");
+        printf("Invalid option.\n");
         return 1;
     }
 
@@ -215,13 +253,12 @@ int main()
     if (scanf("%d", &program) != 1)
     {
         printf("Invalid input.\n");
-        while (getchar() != '\n');
         return 1;
     }
 
     if (program < 1 || program > 2)
     {
-        printf("Invalid option. Try again.\n");
+        printf("Invalid option.\n");
         return 1;
     }
 
@@ -232,7 +269,7 @@ int main()
             break;
 
         case Games:
-            gamesProgram((gamesPrograms)program, &tries, &secret);
+            gamesProgram((gamesPrograms)program);
             break;
 
         case Calculators:
