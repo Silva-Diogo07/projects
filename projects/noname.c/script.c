@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include <time.h>
 
 typedef enum
 {
@@ -110,6 +111,40 @@ void calculatorProgram(calculatorPrograms program)
     }
 }
 
+void numero_secreto(int *secret)
+{
+    int max = 0;
+
+    printf("Enter the max number: ");
+    scanf("%d", &max);
+
+    srand(time(NULL));
+
+    *secret = (rand() % max) + 1;
+}
+
+void ask_for_trys(int *trys)
+{
+    printf("Enter how many trys you want: ");
+    scanf("%d", trys);
+}
+
+void ask_for_guess(int *guess)
+{
+    printf("Qual é o teu palpite? ");
+    scanf("%d", guess);
+}
+
+bool check_guess(int *guess, int *secret, int *trys)
+{
+    if (*guess > *secret)
+    {
+        printf("Lower\n");
+        (*trys)--;
+        return false;
+    }
+    // TODO: Se o palpite for < ; Se o palpite for = ;
+}
 
 // START
 //    |
@@ -154,7 +189,7 @@ void calculatorProgram(calculatorPrograms program)
 //                            |         |       |
 //                    Chama convertersProgram  ...
 //                            |
-//                          END
+//                          End
 int main()
 {
     programType program_type = 0;
