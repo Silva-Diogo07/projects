@@ -5,6 +5,7 @@
 #include <stdlib.h>
 
 void runTemperatureConverter();
+void runWeightConverter();
 
 /* ===================== ENUMS ===================== */
 
@@ -74,7 +75,7 @@ void convertersProgram(convertersPrograms program)
             break;
 
         case weightConverter:
-            printf("Weight Converter (not implemented yet)\n");
+            runWeightConverter();
             break;
 
         default:
@@ -188,7 +189,7 @@ void runTemperatureConverter()
     printf("1. Celcius to fahrenheit\n");
     printf("2. Fahrenheit to celcius\n");
 
-    printf("Enter you choice (1 or 2): ");
+    printf("Enter your choice (1 or 2): ");
     scanf("%d", &choice);
 
     if (choice == 1)
@@ -204,6 +205,38 @@ void runTemperatureConverter()
         scanf("%f", &fahrenheit);
         celcius = (fahrenheit - 32) * 5 / 9;
         printf("%.1f fahrenheit is equal to %.1f celcius\n", fahrenheit, celcius);
+    }
+    else
+    {
+        printf("Invalid choice\n");
+    }
+}
+
+void runWeightConverter()
+{
+    int choice = 0;
+    float pounds = 0.0f;
+    float kilograms = 0.0f;
+
+    printf("1. Kilograms to pounds\n");
+    printf("2. Pounds to kilograms\n");
+
+    printf("Enter your choice (1 or 2): ");
+    scanf("%d", &choice);
+
+    if (choice == 1)
+    {
+        printf("Enter Kilograms: ");
+        scanf("%f", &kilograms);
+        pounds = kilograms * 2.20462;
+        printf("%.2f kilograms is equal to %.2f pounds\n", kilograms, pounds);
+    }
+    else if (choice == 2)
+    {
+        printf("Enter Pounds: ");
+        scanf("%f", &pounds);
+        kilograms = pounds / 2.20462;
+        printf("%.2f pounds is equal to %.2f kilograms\n", pounds, kilograms);
     }
     else
     {
